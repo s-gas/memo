@@ -1,14 +1,14 @@
 package main
 
 import (
-	"net/http"
 	"fmt"
 	"log"
+	"net/http"
 )
 
 type Server struct {
 	config Config
-	mux		*http.ServeMux
+	mux    *http.ServeMux
 }
 
 type Config struct {
@@ -20,7 +20,7 @@ func NewServer(c Config) *Server {
 
 	s := &Server{
 		config: c,
-		mux: mux,
+		mux:    mux,
 	}
 
 	s.mux.HandleFunc("GET /v1/health", s.handleHealth)
