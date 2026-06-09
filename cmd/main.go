@@ -1,11 +1,13 @@
 package main
 
-import "fmt"
+import "log"
 
 func main() {
 	config := Config{
 		Port: 8080,
 	}
 	server := NewServer(config)
-	fmt.Println(server.Config.Port)
+	if err := server.Run(); err != nil {
+		log.Fatal(err)
+	}
 }
