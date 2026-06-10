@@ -22,21 +22,11 @@ func NewServer(c Config) *Server {
 		config: c,
 		mux:    mux,
 	}
-
+	
 	s.mux.HandleFunc("GET /v1/health", s.handleHealth)
 	s.mux.HandleFunc("POST /v1/auth/register", s.handleRegister)
 
 	return s
-}
-
-func (s *Server) handleRegister(w http.ResponseWriter, r *http.Request) {
-	log.Printf("%s %s\n", r.Method, r.URL.Path)
-	w.WriteHeader(http.StatusOK)
-}
-
-func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
-	log.Printf("%s %s\n", r.Method, r.URL.Path)
-	w.WriteHeader(http.StatusOK)
 }
 
 func (s *Server) Run() error {
