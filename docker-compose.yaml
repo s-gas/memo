@@ -1,0 +1,31 @@
+services:
+  memo-server:
+    build: ./memo-server/
+    container_name: memo-server
+    environment:
+      - PORT=1024
+      - TZ=Europe/Berlin
+      - POSTGRES_USER=s-gas
+      - POSTGRES_DB=memo
+    secrets:
+      - postgres_password
+    restart: unless-stopped
+  postgres:
+    image: postgres:17.9
+    container_name: postgres
+    secrets:
+      - postgres_password
+    environment:
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
+      - POSTGRES_USER=s-gas
+      - POSTGRES_DB=memo
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data: {}
+
+secrets:
+  postgres_password:
+    file: ./secrets/postgres_password.txt
