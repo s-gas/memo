@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"encoding/json"
 	"log"
-	"fmt"
 )
 
 type Credentials struct {
@@ -21,7 +20,5 @@ func (s *Server) handleRegister(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "invalid body", http.StatusBadRequest)
 		return
 	}
-	fmt.Println(credentials.Username)
-	fmt.Println(credentials.Password)
 	w.WriteHeader(http.StatusCreated)
 }
