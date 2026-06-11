@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"context"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -11,20 +12,22 @@ import (
 type Server struct {
 	config	Config
 	mux   	*http.ServeMux
-	db			*pgxpool.Pool
+	pool		*pgxpool.Pool
+	ctx			context.Context
 }
 
 type Config struct {
 	Port int
 }
 
-func NewServer(c Config, pool *pgxpool.Pool) *Server {
+func NewServer(ctx context.Context, c Config, pool *pgxpool.Pool) *Server {
 	mux := http.NewServeMux()
 
 	s := &Server{
 		config: c,
 		mux:    mux,
-		db:			pool,
+		pool:		pool,
+		ctx:		ctx,
 	}
 	
 	s.mux.HandleFunc("GET /v1/health", s.handleHealth)
