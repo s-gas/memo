@@ -1,19 +1,19 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net/http"
-	"context"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type Server struct {
-	config	Config
-	mux   	*http.ServeMux
-	pool		*pgxpool.Pool
-	ctx			context.Context
+	config Config
+	mux    *http.ServeMux
+	pool   *pgxpool.Pool
+	ctx    context.Context
 }
 
 type Config struct {
@@ -26,10 +26,10 @@ func NewServer(ctx context.Context, c Config, pool *pgxpool.Pool) *Server {
 	s := &Server{
 		config: c,
 		mux:    mux,
-		pool:		pool,
-		ctx:		ctx,
+		pool:   pool,
+		ctx:    ctx,
 	}
-	
+
 	s.mux.HandleFunc("GET /v1/health", s.handleHealth)
 	s.mux.HandleFunc("POST /v1/auth/register", s.handleRegister)
 

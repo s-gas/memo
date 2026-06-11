@@ -1,13 +1,12 @@
 package main
 
 import (
-	"net/http"
 	"encoding/json"
 	"log"
+	"net/http"
 
 	"github.com/s-gas/memo/memo-server/internal/db"
 )
-
 
 func (s *Server) handleRegister(w http.ResponseWriter, r *http.Request) {
 	log.Printf("%s %s\n", r.Method, r.URL.Path)

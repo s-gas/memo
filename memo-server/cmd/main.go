@@ -1,8 +1,8 @@
 package main
 
 import (
-	"log"
 	"context"
+	"log"
 
 	"github.com/s-gas/memo/internal/db"
 )
