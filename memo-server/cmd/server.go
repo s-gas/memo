@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"log"
 	"net/http"
@@ -13,21 +12,19 @@ type Server struct {
 	config Config
 	mux    *http.ServeMux
 	pool   *pgxpool.Pool
-	ctx    context.Context
 }
 
 type Config struct {
 	Port int
 }
 
-func NewServer(ctx context.Context, c Config, pool *pgxpool.Pool) *Server {
+func NewServer(c Config, pool *pgxpool.Pool) *Server {
 	mux := http.NewServeMux()
 
 	s := &Server{
 		config: c,
 		mux:    mux,
 		pool:   pool,
-		ctx:    ctx,
 	}
 
 	s.mux.HandleFunc("GET /v1/health", s.handleHealth)

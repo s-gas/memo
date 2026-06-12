@@ -16,7 +16,7 @@ func main() {
 	config := Config{
 		Port: 8080,
 	}
-	server := NewServer(ctx, config, pool)
+	server := NewServer(config, pool)
 	if err := server.Run(); err != nil {
 		log.Fatal(err)
 	}
