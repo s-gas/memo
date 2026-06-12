@@ -1,4 +1,4 @@
-module github.com/s-gas/memo
+module github.com/s-gas/memo/memo-server
 
 go 1.26.3
 

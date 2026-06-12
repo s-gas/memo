@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/s-gas/memo/internal/db"
+	"github.com/s-gas/memo/memo-server/internal/db"
 )
 
 func main() {
