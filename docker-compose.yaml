@@ -2,6 +2,8 @@ services:
   memo-server:
     build: ./memo-server/
     container_name: memo-server
+    ports:
+      - "1024:1024"
     environment:
       - PORT=1024
       - TZ=Europe/Berlin
