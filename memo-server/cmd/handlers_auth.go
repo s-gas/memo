@@ -16,5 +16,10 @@ func (s *Server) handleRegister(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "invalid body", http.StatusBadRequest)
 		return
 	}
+	if err := db.CreateUser(r.Context(), s.pool, credentials); err != nil {
+		log.Println("error:", err.Error())
+		http.Error(w, "internal server error", http.StatusInternalServerError)
+		return
+	}
 	w.WriteHeader(http.StatusCreated)
 }
