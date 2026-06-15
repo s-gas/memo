@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"log"
+	"errors"
 	"net/http"
 
 	"github.com/s-gas/memo/memo-server/internal/db"
@@ -16,7 +17,13 @@ func (s *Server) handleRegister(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "invalid body", http.StatusBadRequest)
 		return
 	}
-	if err := db.CreateUser(r.Context(), s.pool, credentials); err != nil {
+	err := db.CreateUser(r.Context(), s.pool, credentials)
+	if errors.Is(err, db.ErrUsernameAlreadyExists) {
+		log.Println("error:", err.Error())
+		http.Error(w, "username already exists", http.StatusConflict)
+		return
+	}
+	if err != nil {
 		log.Println("error:", err.Error())
 		http.Error(w, "internal server error", http.StatusInternalServerError)
 		return
