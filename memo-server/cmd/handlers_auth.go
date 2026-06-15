@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/s-gas/memo/memo-server/internal/db"
+	"github.com/s-gas/memo/memo-server/internal/apperrors"
 )
 
 func (s *Server) handleRegister(w http.ResponseWriter, r *http.Request) {
@@ -18,7 +19,7 @@ func (s *Server) handleRegister(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	err := db.CreateUser(r.Context(), s.pool, credentials)
-	if errors.Is(err, db.ErrUsernameAlreadyExists) {
+	if errors.Is(err, apperrors.UsernameAlreadyExists) {
 		log.Println("error:", err.Error())
 		http.Error(w, "username already exists", http.StatusConflict)
 		return

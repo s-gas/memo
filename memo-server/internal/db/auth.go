@@ -8,6 +8,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/jackc/pgx/v5/pgconn"
+	"github.com/s-gas/memo/memo-server/internal/apperrors"
 )
 
 type Credentials struct {
@@ -15,7 +16,6 @@ type Credentials struct {
 	Password string `json:"password"`
 }
 
-var ErrUsernameAlreadyExists = errors.New("username already exists")
 
 func CreateUser(ctx context.Context, pool *pgxpool.Pool, credentials Credentials) error {
 	hashedPassword, err := hashPassword(credentials.Password)
@@ -29,7 +29,7 @@ func CreateUser(ctx context.Context, pool *pgxpool.Pool, credentials Credentials
 	if err != nil {
 		var pgErr *pgconn.PgError
 		if errors.As(err, &pgErr) && pgErr.Code == "23505" {
-			return ErrUsernameAlreadyExists
+			return apperrors.UsernameAlreadyExists
 		}
 	}
 	return nil
