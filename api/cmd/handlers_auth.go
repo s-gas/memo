@@ -6,8 +6,8 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/s-gas/memo/memo-server/internal/db"
-	"github.com/s-gas/memo/memo-server/internal/apperrors"
+	"github.com/s-gas/memo/api/internal/db"
+	"github.com/s-gas/memo/api/internal/apperrors"
 )
 
 func (s *Server) handleRegister(w http.ResponseWriter, r *http.Request) {

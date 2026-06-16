@@ -8,7 +8,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/jackc/pgx/v5/pgconn"
-	"github.com/s-gas/memo/memo-server/internal/apperrors"
+	"github.com/s-gas/memo/api/internal/apperrors"
 )
 
 type Credentials struct {
