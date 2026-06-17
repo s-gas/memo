@@ -1,7 +1,14 @@
-import { useState } from 'react'
+import { Routes, Route } from "react-router-dom"
+import RegisterPage from './pages/RegisterPage'
+import LoginPage from './pages/LoginPage'
 
 function App() {
-  return <h1>memo</h1>
+  return (
+    <Routes> 
+      <Route path="/register" element={ <RegisterPage/> } />
+      <Route path="/" element={ <LoginPage/> } />
+    </Routes>
+  )
 }
 
 export default App
