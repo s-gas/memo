@@ -27,7 +27,7 @@ function LoginForm() {
           type="password"
           placeholder="••••••••"
           value={password}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
       <button className="submitButton" type="submit">Sign in</button>
