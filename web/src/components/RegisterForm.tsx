@@ -1,13 +1,15 @@
 import { useState } from 'react'
+import axios from 'axios'
+import auth from '../services/auth'
 
 function RegisterForm() {
   const [email, setEmail] = useState('') 
   const [password, setPassword] = useState('')
 
   function handleSubmit(e: React.FormEvent) {
-     e.preventDefault()
-     console.log(email)
-     console.log(password)
+    e.preventDefault()
+    const credentials = { email, password };
+    auth.register(credentials);
   }
 
   return (
