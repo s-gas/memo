@@ -1,8 +1,14 @@
-const Input = ({name, value, handler, validate, message, submit}) => {
+const normalize = (name) => {
+  return name
+          .replace(/([A-Z])/g, (c) => ` ${c}`)
+          .replace(/^./, (c) => c.toUpperCase())
+}
 
+const Input = ({name, value, handler, validate, message, submit}) => {
+  const label = normalize(name);
   return (
-    <div >
-      <label>{name}
+    <div className="input-container">
+      <label>{label}
         <div><input className="input-field" type="text" name={name} onChange={handler} /></div>
       </label>
       <div className="invalid-input-message">

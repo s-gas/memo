@@ -15,7 +15,6 @@ const Register = () => {
   }
 
   const handleChange = (e) => {
-    console.log(e.target.value);
     setForm({...form, [e.target.name]: e.target.value});
     setSubmit(false);
   }
@@ -35,7 +34,7 @@ const Register = () => {
 
   return (
     <div className="page">
-      <h1>Register</h1>
+      <h1>Registration</h1>
       <form className="auth-form" onSubmit={handleSubmit}>
         <Input name="username" value={form.username} handler={handleChange} submit={submit}/>
         <Input name="email" value={form.email} handler={handleChange}
