@@ -34,9 +34,9 @@ const Register = () => {
   }
 
   return (
-    <div>
+    <div className="page">
       <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="auth-form" onSubmit={handleSubmit}>
         <Input name="username" value={form.username} handler={handleChange} submit={submit}/>
         <Input name="email" value={form.email} handler={handleChange}
           validate={() => form.email.includes('@')} message="Invalid email" submit={submit} />
@@ -44,7 +44,7 @@ const Register = () => {
           validate={() => form.password.length >= 8} message="Passwords must be at least 8 characters long" submit={submit}/>
         <Input name="confirmPassword" value={form.confirmPassword} handler={handleChange}
           validate={() => form.password === form.confirmPassword} message="Passwords don't match" submit={submit}/>
-        <button type="submit">Register</button>
+        <button className="submit-button" type="submit">Register</button>
       </form>
     </div>
   )
