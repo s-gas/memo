@@ -1,49 +1,37 @@
 import { useState } from 'react'
-import Messages from '../components/Messages'
+import Input from '../components/Input'
 
 const Register = () => {
   const [form, setForm] = useState({username: '', email: '', password: '', confirmPassword: ''});
-  const [messages, setMessages] = useState([]);
-
-  const handleChange = (e) => {
-    setForm({...form, [e.target.name]: e.target.value});
-  } 
 
   const validate = () => {
-    console.log("validate");
+    return (
+      form.email.includes('@') &&
+      form.password.length >= 8 &&
+      form.password === form.confirmPassword
+    )
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    validate();
+    if (!validate()) {
+      console.log("invalid form");
+      return;
+    )
   }
 
   return (
     <div>
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username
-            <input type="text" name="username" onChange={(e) => handleChange(e)}/>
-          </label>
-        </div>
-        <div>
-          <label>Email
-            <input type="text" name="email" onChange={(e) => handleChange(e)}/>
-          </label>
-        </div>
-        <div>
-          <label>Password
-            <input type="text" name="password" onChange={(e) => handleChange(e)}/>
-          </label>
-        </div>
-        <div>
-          <label>Confirm Password
-            <input type="text" name="confirmPassword" onChange={(e) => handleChange(e)}/>
-          </label>
-        </div>
+        <Input name="username" setForm={setForm} form={form}/>
+        <Input name="email" setForm={setForm} form={form}
+          validate={() => form.email.includes('@')} message="Invalid email" />
+        <Input name="password" setForm={setForm} form={form}
+          validate={() => form.password.length >= 8} message="Passwords must be at least 8 characters long" />
+        <Input name="confirmPassword" setForm={setForm} form={form}
+          validate={() => form.password === form.confirmPassword} message="Passwords don't match" />
         <button type="submit">Register</button>
-        <Messages messages={messages} />
       </form>
     </div>
   )
