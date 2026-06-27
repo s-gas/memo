@@ -9,7 +9,12 @@ const register = (form) => {
     password: form.password,
   }
   const url = `${baseUrl}/v1/auth/register`;
-  return axios.post(url, user)
+  return axios.post(url, user);
 }
 
-export default { register }
+const login = (form) => {
+  const url = `${baseUrl}/v1/auth/login`;
+  return axios.post(url, form);
+}
+
+export default { register, login }
