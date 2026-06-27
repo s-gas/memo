@@ -1,18 +1,13 @@
-const Input = ({name, setForm, form, validate, message, submit}) => {
-
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    setForm({...form, [e.target.name]: e.target.value});
-  } 
+const Input = ({name, value, handler, validate, message, submit}) => {
 
   return (
     <div>
       <label>{name}
-        <input type="text" name={name} onChange={handleChange} />
+        <input type="text" name={name} onChange={handler} />
       </label>
       <div className="invalid-input-message">
-        {(submit && !form[name] && "This field cannot be empty") ||
-          (validate && form[name] && !validate() && message)}
+        {(submit && !value && "This field cannot be empty") ||
+          (validate && value && !validate() && message)}
       </div>
     </div>
   )
