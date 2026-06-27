@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Input from '../components/Input'
 import auth from '../services/auth'
 
@@ -34,7 +35,7 @@ const Register = () => {
 
   return (
     <div className="page">
-      <h1>Registration</h1>
+      <h1>Signup</h1>
       <form className="auth-form" onSubmit={handleSubmit}>
         <Input name="username" value={form.username} handler={handleChange} submit={submit}/>
         <Input name="email" value={form.email} handler={handleChange}
@@ -43,7 +44,8 @@ const Register = () => {
           validate={() => form.password.length >= 8} message="Passwords must be at least 8 characters long" submit={submit}/>
         <Input name="confirmPassword" value={form.confirmPassword} handler={handleChange}
           validate={() => form.password === form.confirmPassword} message="Passwords don't match" submit={submit}/>
-        <button className="submit-button" type="submit">Register</button>
+        <button className="submit-button" type="submit">Signup</button>
+        <p className="auth-link">Already registered? <Link to="/login">Login</Link></p>
       </form>
     </div>
   )
