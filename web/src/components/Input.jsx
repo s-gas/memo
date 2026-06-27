@@ -6,10 +6,11 @@ const normalize = (name) => {
 
 const Input = ({name, value, handler, validate, message, submit}) => {
   const label = normalize(name);
+  const type = (name.toLowerCase().includes("password")) ? "password" : "text";
   return (
     <div className="input-container">
       <label>{label}
-        <div><input className="input-field" type="text" name={name} onChange={handler} /></div>
+        <div><input className="input-field" type={type} name={name} onChange={handler} /></div>
       </label>
       <div className="invalid-input-message">
         {(submit && !value && "This field cannot be empty") ||
