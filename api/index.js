@@ -1,5 +1,6 @@
-const express = require('express')
-const cors = require('cors')
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
 const app = express();
 
 //middlewares
@@ -26,8 +27,8 @@ app.post('/v1/auth/register', (req, res) => {
   res.json(req.body);
 });
 
-const port = 3000;
+const PORT = process.env.PORT;
 
-app.listen(port, () => {
-  console.log(`server listening on :${port}`);
+app.listen(PORT, () => {
+  console.log(`server listening on :${PORT}`);
 })
