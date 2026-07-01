@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -27,8 +26,4 @@ app.post('/v1/auth/register', (req, res) => {
   res.json(req.body);
 });
 
-const PORT = process.env.PORT;
-
-app.listen(PORT, () => {
-  console.log(`server listening on :${PORT}`);
-})
+module.exports = app;
