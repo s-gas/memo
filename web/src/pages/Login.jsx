@@ -23,13 +23,13 @@ const Login = () => {
 
   return (
     <div className="page">
-      <h1>Login</h1>
+      <h1>Log in</h1>
       <form className="auth-form" onSubmit={handleSubmit}>
         <Input name="username" value={form.username} handler={handleChange} submit={submit}/>
         <Input name="password" value={form.password} handler={handleChange} submit={submit}/>
-        <button className="submit-button" type="submit">Login</button>
+        <button className="submit-button" type="submit">Log in</button>
       </form>
-      <p>Don't have an account? <Link to="/register">Signup</Link></p>
+      <p>Don't have an account? <Link to="/register">Sign up</Link></p>
     </div>
   )
 }
