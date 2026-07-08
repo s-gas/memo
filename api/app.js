@@ -1,8 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const app = express();
 const registerRouter = require('./controllers/register');
+const config = require('./utils/config');
+const logger = require('./utils/logger');
+
+const app = express();
+
+logger.info(config.MONGODB_URL);
+
+mongoose
+  .connect(config.MONGODB_URL)
+  .then(() => logger.info("connected to db"))
+  .catch(() => logger.info("failed to connect to db"));
 
 app.use(cors());
 app.use(express.json());
