@@ -6,6 +6,8 @@ import auth from '../services/auth'
 const Register = () => {
   const [form, setForm] = useState({username: '', email: '', password: '', confirmPassword: ''});
   const [submit, setSubmit] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const validate = () => {
     return (
@@ -16,6 +18,8 @@ const Register = () => {
   }
 
   const handleChange = (e) => {
+    setError(false);
+    setErrorMessage(null);
     setForm({...form, [e.target.name]: e.target.value});
     setSubmit(false);
   }
@@ -29,9 +33,9 @@ const Register = () => {
     }
     try {
       await auth.register(form);
-      console.log("success");
     } catch (err) {
-      console.log("failure");
+      setError(true);
+      setErrorMessage(err.response.data.err)
     }
   }
 
@@ -49,6 +53,7 @@ const Register = () => {
         <button className="submit-button" type="submit">Sign up</button>
         <p className="auth-link">Already registered? <Link to="/login">Log in</Link></p>
       </form>
+      {error && <p>{errorMessage}</p>}
     </div>
   )
 }
