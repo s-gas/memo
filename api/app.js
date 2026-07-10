@@ -7,10 +7,15 @@ const logger = require('./utils/logger');
 
 const app = express();
 
-mongoose
-  .connect(config.MONGODB_URL)
-  .then(() => logger.info("connected to db"))
-  .catch(() => logger.info("failed to connect to db"));
+(async () => {
+  try {
+    await mongoose.connect(config.MONGODB_URL)
+    logger.info("connected to db")
+  } catch (err) {
+    logger.error("failed to connect to db", err);
+    process.exit(1);
+  }
+})()
 
 app.use(cors());
 app.use(express.json());

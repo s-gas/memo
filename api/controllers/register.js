@@ -1,12 +1,10 @@
 const registerRouter = require('express').Router()
 const User = require('../models/user')
 
-registerRouter.post('/', (req, res) => {
+registerRouter.post('/', async (req, res) => {
   const user = new User(req.body);
-  user
-    .save()
-    .then((result) => res.status(201).json(result))
-    .catch(() => res.status(400).json({error: "invalid request"}));
+  const result = await user.save()
+  res.status(201).json(result);
 });
 
 module.exports = registerRouter
