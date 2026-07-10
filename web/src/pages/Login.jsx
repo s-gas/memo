@@ -12,13 +12,15 @@ const Login = () => {
     setSubmit(false);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmit(true);
-    auth
-      .login(form)
-      .then(() => console.log("success"))
-      .catch(() => console.log("failure"))
+    try {
+      await auth.login(form);
+      console.log("success");
+    } catch (err) {
+      console.log("failure");
+    }
   }
 
   return (

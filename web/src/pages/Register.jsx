@@ -20,17 +20,19 @@ const Register = () => {
     setSubmit(false);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmit(true);
     if (!validate()) {
       console.log("invalid form");
       return;
     }
-    auth
-      .register(form)
-      .then(() => console.log("success"))
-      .catch(() => console.log("failure"))
+    try {
+      await auth.register(form);
+      console.log("success");
+    } catch (err) {
+      console.log("failure");
+    }
   }
 
   return (
