@@ -35,7 +35,7 @@ const Register = () => {
     }
     try {
       await auth.register(form);
-      navigate("/login");
+      navigate("/registration-complete");
     } catch (err) {
       setError(true);
       setErrorMessage(`An account with this ${err.response.data.err}. Please enter another one.`)
