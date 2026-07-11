@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Input from '../components/Input'
 import auth from '../services/auth'
 
@@ -8,6 +8,8 @@ const Register = () => {
   const [submit, setSubmit] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null)
+
+  const navigate = useNavigate();
 
   const validate = () => {
     return (
@@ -33,9 +35,10 @@ const Register = () => {
     }
     try {
       await auth.register(form);
+      navigate("/login");
     } catch (err) {
       setError(true);
-      setErrorMessage(err.response.data.err)
+      setErrorMessage(`An account with this ${err.response.data.err}. Please enter another one.`)
     }
   }
 
@@ -53,7 +56,7 @@ const Register = () => {
         <button className="submit-button" type="submit">Sign up</button>
         <p className="auth-link">Already registered? <Link to="/login">Log in</Link></p>
       </form>
-      {error && <p>{errorMessage}</p>}
+      {error && <p className="auth-error">{errorMessage}</p>}
     </div>
   )
 }
