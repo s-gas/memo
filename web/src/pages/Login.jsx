@@ -16,8 +16,9 @@ const Login = () => {
     e.preventDefault();
     setSubmit(true);
     try {
-      await auth.login(form);
-      console.log("success");
+      const response = await auth.login(form);
+      const token = response.data.token;
+      console.log(token);
     } catch (err) {
       console.log("failure");
     }
