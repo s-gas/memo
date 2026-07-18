@@ -6,8 +6,11 @@ import auth from '../services/auth'
 const Login = () => {
   const [form, setForm] = useState({username: '', password: ''});
   const [submit, setSubmit] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const handleChange = (e) => {
+    setError(false);
     setForm({...form, [e.target.name]: e.target.value});
     setSubmit(false);
   }
@@ -18,10 +21,10 @@ const Login = () => {
     try {
       const response = await auth.login(form);
       const token = response.data.token;
-      console.log(token);
       window.localStorage.setItem('token', token);
     } catch (err) {
-      console.log("failure");
+      setError(true);
+      setErrorMessage("Invalid credentials");
     }
   }
 
@@ -34,6 +37,7 @@ const Login = () => {
         <button className="submit-button" type="submit">Log in</button>
       </form>
       <p>Don't have an account? <Link to="/register">Sign up</Link></p>
+      {error && <p className="auth-error">{errorMessage}</p>}
     </div>
   )
 }
