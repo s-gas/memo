@@ -19,6 +19,7 @@ const Login = () => {
       const response = await auth.login(form);
       const token = response.data.token;
       console.log(token);
+      window.localStorage.setItem('token', token);
     } catch (err) {
       console.log("failure");
     }
